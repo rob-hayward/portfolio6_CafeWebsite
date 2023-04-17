@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Coffee and Code{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 col-md-8 p-0">
+            <div class="img-wrapper">
+                <div class="img-container">
+                    <img src="static/images/cafe.png" alt="Background image" class="bg-image" />
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 p-0 overflow-auto" style="max-height: 100vh; background-color: lightgray; z-index: 1; position: sticky; top: 0;">
+            <div class="p-3">
+                <!-- Add the scrolling list of cafes here -->
+                {% for cafe in cafes %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5>{{ cafe.name }}</h5>
+                            <p>{{ cafe.location }}</p>
+                        </div>
+                        <div class="card-body">
+                            <img src="{{ cafe.img_url }}" alt="Cafe image" class="img-fluid">
+                            <ul>
+                                <li>Power socket availability: {{ 'Yes' if cafe.has_sockets else 'No' }}</li>
+                                <li>Toilet facilities: {{ 'Yes' if cafe.has_toilet else 'No' }}</li>
+                                <li>WIFI available: {{ 'Yes' if cafe.has_wifi else 'No' }}</li>
+                                <li>Can take calls: {{ 'Yes' if cafe.can_take_calls else 'No' }}</li>
+                                <li>Number of seats: {{ cafe.seats }}</li>
+                                <li>Coffee price: {{ cafe.coffee_price }}</li>
+                            </ul>
+                            <p>Map URL: <a href="{{ cafe.map_url }}" target="_blank">{{ cafe.map_url }}</a></p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
