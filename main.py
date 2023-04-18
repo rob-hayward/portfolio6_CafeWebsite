@@ -6,11 +6,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, BooleanField, SubmitField, PasswordField
 from flask_migrate import Migrate
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://///Users/rob/PycharmProjects/portfolio6_CafeWebsite/database/cafes.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'supersecret123'  # Add this line
+app.config['SECRET_KEY'] = 'mysecretkey123'  # Add this line
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager()
